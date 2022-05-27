@@ -152,9 +152,9 @@ async def send_welcome(message: types.Message):
     config.status = True
     config.chat_id = types.chat.Chat.get_current()["id"]
 
-    if len(active_coro_list) == 0:
-        loop.create_task(periodic(config._interval))
-
+    if len(active_coro_list) != 0:
+        active_coro_list.pop(0)
+    loop.create_task(periodic(config._interval))
 
 
 # Answer to /stop command
@@ -176,8 +176,15 @@ async def stop_bot(message: types.Message):
 @dp.message_handler(text=("Parameters"))
 async def parameters(message: types.Message):
     conversion = timedelta(seconds=config.interval)
-    await message.answer(
-        f"Now bot tracking {config.pair} pair with: {conversion} interval "
+    if config.status:
+        await message.answer(
+            f"""Now bot tracking {config.pair} pair with: {conversion} interval\n
+Tracking status: ACTIVE"""
+    )
+    else:
+        await message.answer(
+            f"""Now bot tracking {config.pair} pair with: {conversion} interval\n
+Tracking status: INACTIVE"""
     )
 
 
@@ -222,7 +229,7 @@ async def periodic(sleep_for):
                             )
                 else:
                     await bot.send_message(config.chat_id, "Something went wrong =(")
-                
+
             await asyncio.sleep(sleep_for)
         else:
             if len(active_coro_list) == 0:
