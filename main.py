@@ -169,7 +169,6 @@ async def stop_bot(message: types.Message):
 async def stop_bot(message: types.Message):
     await message.answer("Start tracking!")
     config.status = True
-    # loop.create_task(periodic(config._interval))
 
 
 # Parametrs
