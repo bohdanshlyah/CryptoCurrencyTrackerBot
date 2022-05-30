@@ -2,8 +2,8 @@ version: '3.9'
 
 services:
     app:
-      build:
-        context: ./
+      restart: always
+      image: bohdanshlyah/crypto_currency_tracker_bot:latest
       command: >
         sh -c "python3 main.py"
       env_file: .env
