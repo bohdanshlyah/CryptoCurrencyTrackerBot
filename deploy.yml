@@ -16,7 +16,7 @@
 
     - name: "copy docker-compose.yml"
       copy:
-        src: "bohdanshlyah/crypto_currency_tracker_bot"
+        src: "docker-compose.yml"
         dest: "{{ app_path }}/docker-compose.yml"
         owner: "noteadmin"
         group: "noteadmin"
