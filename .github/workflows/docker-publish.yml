@@ -27,3 +27,16 @@ jobs:
         with:
           push: true
           tags: bohdanshlyah/crypto_currency_tracker_bot:latest
+          
+      - 
+        name: Deploy Service
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: deploy.yml
+          directory: ./
+          key: ${{secrets.KART_SSH_PRIV_KEY}}
+          inventory: |
+            [all]
+            3.73.129.147 ansible_ssh_port=${{secrets.KART_SSH_PORT}} ansible_ssh_user=${{secrets.KART_SSH_USER}}
+          options: |
+            --verbose
