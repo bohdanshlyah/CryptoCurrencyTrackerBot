@@ -32,7 +32,8 @@ jobs:
         name: Deploy Service
         uses: dawidd6/action-ansible-playbook@v2
         with:
-          playbook: ansible/deploy.yml
+          playbook: deploy.yml
+          directory: /
           key: ${{secrets.KART_SSH_PRIV_KEY}}
           inventory: |
             [all]
