@@ -37,6 +37,6 @@ jobs:
           key: ${{secrets.KART_SSH_PRIV_KEY}}
           inventory: |
             [all]
-            3.73.129.147 ansible_ssh_port=${{secrets.KART_SSH_PORT}} ansible_ssh_user=${{secrets.KART_SSH_USER}}
+            3.73.129.147 ansible_ssh_port=${{secrets.KART_SSH_PORT}} ansible_ssh_user=${{secrets.KART_SSH_USER}} ansible_become_user=yes
           options: |
             --verbose
