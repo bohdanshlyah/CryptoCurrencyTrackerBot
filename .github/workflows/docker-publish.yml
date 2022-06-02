@@ -49,5 +49,4 @@ jobs:
           inventory: |
             [all]
             ansible_ssh_host=3.73.129.147 ansible_ssh_port=${{secrets.KART_SSH_PORT}} ansible_user=${{secrets.KART_SSH_USER}} ansible_ssh_private_key_file=${{secrets.KART_SSH_PRIV_KEY}}
-          options: |
-            --verbose --user root
+          options: --user root
