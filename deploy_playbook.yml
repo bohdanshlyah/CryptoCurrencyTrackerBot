@@ -12,7 +12,7 @@
           remove_images: local
 
       - name: login to registry
-        shell: "docker login -p {{ secrets.DOCKERHUB_PASS }} -u {{ secrets.DOCKERHUB_USERNAME }}"
+        shell: "docker login -p $DOCKERHUB_PASS -u $DOCKERHUB_USERNAME"
 
       - name: Start Docker Compose service
         docker_compose:

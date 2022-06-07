@@ -36,16 +36,19 @@ jobs:
         run: sudo apt update && sudo apt install ansible && ansible --version
 
       -
-        name: add SSH_KEY
-        run:  echo "$SSH_KEY" > ~/linux.pem 
+        name: add secrets
+        run: echo "$SSH_KEY" > ~/linux.pem 
         shell: bash
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
       
       - 
-        name: chmod  
+        name: chmod
         run: sudo chmod 744 inventory.yml && sudo chmod 400 ~/linux.pem 
 
       -
         name: run ansible-playbook
         run: ansible-playbook -i inventory.yml deploy_playbook.yml
+        env:
+          DOCKERHUB_PASS: ${{ secrets.DOCKERHUB_PASS }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
