@@ -1,0 +1,23 @@
+---
+  - name: Test connection to my servers
+    hosts: production
+    become: yes
+
+    tasks:
+      - name: Stop Docker Compose
+        community.docker.docker_compose:
+          project_src: /home/ec2-user/TGBot
+          build: no
+          stopped: yes
+          remove_images: local
+
+      - name: login to registry
+        shell: "docker login -p {{ secrets.DOCKERHUB_PASS }} -u {{ secrets.DOCKERHUB_USERNAME }}"
+
+      - name: Start Docker Compose service
+        docker_compose:
+          pull: true
+          state: present
+          project_src: /home/ec2-user/TGBot
+          files:
+            - docker-compose.yml

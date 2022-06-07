@@ -1,0 +1,8 @@
+all:
+  children:
+    control:
+      hosts: 
+        3.73.129.147:
+          ansible_user: ec2-user
+          ansible_ssh_private_key_file: '~/linux.pem'
+          ansible_ssh_extra_args: '-o StrictHostKeyChecking=no'
