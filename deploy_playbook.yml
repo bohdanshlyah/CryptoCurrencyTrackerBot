@@ -1,6 +1,6 @@
 ---
   - name: Test connection to my servers
-    hosts: production
+    hosts: all
     become: yes
 
     tasks:
