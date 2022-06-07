@@ -238,6 +238,10 @@ async def periodic(sleep_for):
                 await asyncio.sleep(1)
                 break
 
+@dp.message_handler()
+async def echo_func(message: types.Message):
+
+    await message.reply(message.text)
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
